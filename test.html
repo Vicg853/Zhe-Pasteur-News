@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <link rel="stylesheet" href="css/shared_css.css">
+        <link href="MDB/css/bootstrap.css" rel="stylesheet">
+        <link href="MDB/css/mdb.css" rel="stylesheet">
+        <link href="css/bootstrap_css.css" rel="stylesheet">
+        <link href="MDB/css/mdb.lite.css" rel="stylesheet">
+        <link href="MDB/css/style.css" rel="stylesheet">
+        <link href="MDB/css/modules/animations-extended.css" rel="stylesheet">
+        <script href="MDB/scss/mdb.scss" rel="stylesheet"></script>
+        <script href="MDB/scss/mdb.lite.scss"></script>
+        <script href="MDB/scss/free/_navbars.scss"></script>
+        <script href="MDB/scss/free/_dropdowns.scss"></script>
+        <script href="MDB/scss/free/modules/animations-extended/_module.scss"></script>
+        <script href="MDB/scss/free/modules/animations-extended/animations-extended.scss"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="MDB/js/mdb.min.js"></script>
+        <script src="MDB/js/modules/scrolling-navbar.js"></script>
+        <script src="MDB/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+        <div class="modal-content">
+          <div class="modal-c-tabs">
+            <ul class="nav nav-tabs md-tabs tabs-2" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link blue-gradient active text-white" data-toggle="tab" href="#panel7" role="tab">
+                  Mes informations et autres</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link blue-gradient text-white" data-toggle="tab" href="#panel8" role="tab">
+                  Modifier mes informations</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <!--Login pannel-->
+              <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+                <div class="modal-body mb-1 text-center">
+                    <div class="avatar mx-auto" style="width: 150px; height: auto;">
+                        <img src="users/img/'.$_SESSION['userImgLink'].'" class="rounded-circle z-depth-1"
+                          alt="Sample avatar">
+                    </div>
+                    <h5 class="font-weight-bold mt-4 mb-3">'.$_SESSION['userFirstName'].' '.$_SESSION['userLastName'].'</h5>
+                    <h3 class="font-weight-bold">Admission: <br> '.$_SESSION['userAdmissionDate'].'</h3>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn blue-gradient text-white" data-dismiss="modal">Fermer</button>
+                </div>
+              </div>
+              
+              <!--Create account pannel-->
+              <div class="tab-pane fade" id="panel8" role="tabpanel">
+                <div class="modal-body text-center">
+                    <h4 class="font-weight-bold">Modifier mot-de-passe:</h4>
+                    <div class="md-form">
+                      <input type="text" id="form1" placeholder="Mot-de-passe actuel" class="form-control">
+                      <input type="text" id="form1" placeholder="Nouvel mot-de-passe" class="form-control">
+                      <input type="text" id="form1" placeholder="Verification du nouvel mot-de-passe" class="form-control">
+                      <button class="btn blue-gradient">Modifier</button>
+                    </div>
+                    <h4 class="font-weight-bold">Modifier autres donnés:</h4>
+                    <div class="md-form">
+                        <select class="browser-default custom-select">
+                          <option value="" disabled selected>Choisises</option>
+                          <option value="1">Nom</option>
+                          <option value="2">Prènom</option>
+                          <option value="3">Adresse mail</option>
+                        </select>
+                      <input type="text" id="form1" placeholder="Nouvelle donné a etre changé" class="form-control">
+                      <button class="btn blue-gradient">Modifier</button>
+                    </div>
+                    <h4 class="font-weight-bold text-danger">Suprimer compte ?</h4>
+                    <div class="md-form">
+                      <button class="btn btn-danger">Suprimmer</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn blue-gradient text-white" data-dismiss="modal">Fermer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        </div>
+      <div class="text-center">
+        <a href="" class="btn btn-default btn-rounded my-3" data-toggle="modal" data-target="#modalLRForm">Launch
+          Modal LogIn/Register</a>
+      </div>
+    </body>
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <link rel="stylesheet" href="css/shared_css.css">
+        <link href="MDB/css/bootstrap.css" rel="stylesheet">
+        <link href="MDB/css/mdb.css" rel="stylesheet">
+        <link href="css/bootstrap_css.css" rel="stylesheet">
+        <link href="MDB/css/mdb.lite.css" rel="stylesheet">
+        <link href="MDB/css/style.css" rel="stylesheet">
+        <link href="MDB/css/modules/animations-extended.css" rel="stylesheet">
+        <script href="MDB/scss/mdb.scss" rel="stylesheet"></script>
+        <script href="MDB/scss/mdb.lite.scss"></script>
+        <script href="MDB/scss/free/_navbars.scss"></script>
+        <script href="MDB/scss/free/_dropdowns.scss"></script>
+        <script href="MDB/scss/free/modules/animations-extended/_module.scss"></script>
+        <script href="MDB/scss/free/modules/animations-extended/animations-extended.scss"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="MDB/js/mdb.min.js"></script>
+        <script src="MDB/js/modules/scrolling-navbar.js"></script>
+        <script src="MDB/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog cascading-modal" role="document">
+              <div class="modal-content">
+                <div class="modal-c-tabs">
+                  <ul class="nav nav-tabs md-tabs tabs-2" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link blue-gradient active text-white" data-toggle="tab" href="#panel7" role="tab">
+                        Faire Login</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link blue-gradient text-white" data-toggle="tab" href="#panel8" role="tab">
+                        Créer un compte</a>
+                    </li>
+                  </ul>
+                  <div class="tab-content">
+                    <!--Login pannel-->
+                    <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+                      <div class="modal-body mb-1 text-center">
+                          <p class="h4 mb-4 text-danger"></p>
+                          <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Login">
+                            <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+                            <div class="d-flex justify-content-around">
+                              <div>
+                                  <div class="custom-control custom-checkbox">
+                                      <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+                                      <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+                                  </div>
+                              </div>
+                              <div>
+                                  <a href="">Mot-de-passe oblié ?</a>
+                              </div>
+                          </div>
+                          <button class="btn btn-info btn-block my-4 blue-gradient" id="submit_login" type="submit">Sign in</button>
+                      </div>
+                      <div class="modal-footer">
+                          <button class="btn blue-gradient text-white" data-dismiss="modal">Fermer</button>
+                      </div>
+                    </div>
+                    <script>
+                        $("#submit_login").click(function() {
+                            var user_name = $("#defaultLoginFormEmail").val();
+                            var password = $("#defaultLoginFormPassword").val();
+                            $.ajax({
+                              url : "php/login_verify.php",
+                              type: "POST",
+                              data:{
+                                user_name: user_name,
+                                password: password
+                              },
+                              success: function( results ){
+                                var obj=$.parseJSON(results); 
+                                $("#userAvatarDiv").empty();
+                                $("#modalLRForm").empty();
+                                $("#userAvatarDiv").append(obj.LoginAvatarResult);
+                                $("#modalLRForm").append(obj.LoginFormresult);
+                              }
+                            });
+                        });
+                    </script>
+                    <!--Create account pannel-->
+                    <div class="tab-pane fade" id="panel8" role="tabpanel">
+                      <div class="modal-body">
+                        <p class="h4 mb-4 text-danger"></p>
+                        <div class="form-row mb-4">
+                          <div class="col">
+                              <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Prénom">
+                          </div>
+                          <div class="col">
+                              <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Nom">
+                          </div>
+                        </div>
+                        <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="Adresse mail">
+                        <input type="text" id="defaultRegisterFormLogin" class="form-control mb-4" placeholder="Utilisateur">
+                        <input type="password" id="defaultRegisterFormPassword" class="form-control mb-4" placeholder="Mot-de-passe" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+                        <input type="password" id="defaultRegisterFormPasswordVerification" class="form-control mb-4" placeholder="Mot-de-passe" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">Image</span>
+                          </div>
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                            <label class="custom-file-label" for="inputGroupFile01">Choisiser une image</label>
+                          </div>
+                        </div>
+                        <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
+                            Optionel - Image de profil
+                        </small>
+                        <button id="submit_new_account" class="btn btn-info my-4 btn-block blue-gradient" type="submit">Créer compte</button>
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn blue-gradient text-white" data-dismiss="modal">Fermer</button>
+                      </div>
+                      <script>
+                        $("#submit_new_account").click(function() {
+                            var new_firstName = $("#defaultRegisterFormFirstName").val();
+                            var new_lastName = $("#defaultRegisterFormLastName").val();
+                            var new_email = $("#defaultRegisterFormEmail").val();
+                            var new_login = $("#defaultRegisterFormLogin").val();
+                            var new_password = $("#defaultRegisterFormPassword").val();
+                            var new_password_verification = $("#defaultRegisterFormPasswordVerification").val();
+                            var new_phone = $("#defaultRegisterPhonePassword").val();
+                            $.ajax({
+                              url : "php/new_account.php",
+                              type: "POST",
+                              data:{
+                                new_firstName : new_firstName,
+                                new_lastName : new_lastName,
+                                new_email : new_email,
+                                new_login : new_login,
+                                new_password : new_password,
+                                new_password_verification : new_password_verification
+                              },
+                              success: function( results ){
+                                var obj=$.parseJSON(results); 
+                                $("#userAvatarDiv").empty();
+                                $("#modalLRForm").empty();
+                                $("#userAvatarDiv").append(obj.LoginAvatarResult);
+                                $("#modalLRForm").append(obj.Login_Account_CreateFormsresult);
+                              }
+                            });
+                        });
+                      </script>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <header>
+          <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+            <a class="navbar-brand" href="index.html"><strong>Z.P.N.</strong></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a  class="nav-link" href="index.html" >Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#" >Chercher</a>
+                </li>
+                <li class="nav-item">
+                  <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">Types d'articles</a>
+                    <div class="dropdown-menu dropdown-primary">
+                      <a class="dropdown-item" href="#">Résumés</a>
+                      <a class="dropdown-item" href="#">Histoires</a>
+                      <a class="dropdown-item" href="#">Lycée Pasteur</a>
+                    </div>
+                  </div>
+                </li>
+                <li class="nav-item active">
+                  <a  class="nav-link" href="#" >Sur nous <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a  class="nav-link" href="contact_us.html" >Contact</a>
+                </li>
+              </ul>
+              <ul class="navbar-nav ml-auto nav-flex-icons" style="justify-content:center;">
+                  <li class="nav-item avatar dropdown" id="userAvatarDiv">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="false">
+                      <img src="https://img.icons8.com/cotton/64/000000/gender-neutral-user.png " class="rounded-circle img-fluid" alt="avatar image" style="width: 50px; height: 50px; margin-left: 20px;">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-55">
+                      <a id="submit_login" class="nav-link text-info" data-toggle="modal" data-target="#modalLRForm" >Login/Créer un compte</a>
+                    </div>
+                  </li>
+              </ul>
+            </div>
+          </nav>
+            <div class="view viewHeader intro-2">
+              <div class="full-bg-img">
+                <div class="mask rgba-blue-light flex-center">
+                  <div style="font-size: calc(1.525rem + 1.3vw) !important;" class="container text-center white-text wow fadeInUp">
+                    <h1>Zhe Pasteur news</h1>
+                    <br>
+                    <h3>Sur nous</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </header>
+        <div id="about_us_content">
+            <div style="margin-top:150px;margin-bottom:140px;">
+                <h2 class="h1-responsive font-weight-bold text-center my-5">Notre equipe</h2>
+                <p class="grey-text text-center w-responsive mx-auto mb-5">Ici vous pouvez l'equipe, le "backdors" du projet Zhe Pasteur News, un Journal crée 100%, dès la programmation en code pur
+                    jusque a la prise de quelques fotos, redaction d'articles, administration entre autres. Le projet a débuté en 2018, avec Nathan Debaz, et continue jusque a haujoud'hui.
+                    Voyez ici donc notre merveilleuse equipe.
+                </p>
+            </div>
+            <div style="margin-top:150px;margin-bottom:140px;">
+                <h1 class="h1-responsive font-weight-bold text-center my-5">Administration</h1>
+            </div>
+            <div id="carousel-1" class="carousel slide carousel-fade" data-ride="carousel" data-interval="false">
+                <ol class="carousel-indicators">
+                  <li data-target="#carousel-1" data-slide-to="0" class="active"></li>
+                  <li data-target="#carousel-1" data-slide-to="1"></li>
+                  <li data-target="#carousel-1" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                  <div class="carousel-item active">
+                    <div class="view">
+                      <div class="full-bg-img flex-center mask rgba-blue-light white-text">
+                        <ul class="animated fadeInUp col-md-12 list-unstyled list-inline">
+                            <div class="avatar" style="display:flex;justify-content:center;">
+                              <img src="img/debaz_staff.jpg" class="rounded z-depth-1" alt="Sample avatar" width="200px" height="250px;">
+                            </div>
+                            <h1 class="font-weight-bold mb-3">Nathan Debaz</h1>
+                            <h3 class="font-weight-bold mb-3"></h3>
+                            <h3 class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic
+                            tenetur.</h3>
+                            <div style="display:flex;justify-content:center; align-content: center; align-items: center;">
+                                <a class="p-2 fa-lg fb-ic">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMjYiIGhlaWdodD0iMjYiCnZpZXdCb3g9IjAgMCAxOTIgMTkyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE5MnYtMTkyaDE5MnYxOTJ6IiBmaWxsPSJub25lIj48L3BhdGg+PGcgZmlsbD0iI2ZmZmZmZiI+PGcgaWQ9InN1cmZhY2UxIj48cGF0aCBkPSJNNTUuNzMwNzcsMGMtMzAuNjkyMzEsMCAtNTUuNzMwNzcsMjUuMDM4NDYgLTU1LjczMDc3LDU1LjczMDc3djgwLjUzODQ2YzAsMzAuNjkyMzEgMjUuMDM4NDYsNTUuNzMwNzcgNTUuNzMwNzcsNTUuNzMwNzdoODAuNTM4NDZjMzAuNjkyMzEsMCA1NS43MzA3NywtMjUuMDM4NDYgNTUuNzMwNzcsLTU1LjczMDc3di04MC41Mzg0NmMwLC0zMC42OTIzMSAtMjUuMDM4NDYsLTU1LjczMDc3IC01NS43MzA3NywtNTUuNzMwNzd6TTU1LjczMDc3LDE0Ljc2OTIzaDgwLjUzODQ2YzIyLjcwMTkyLDAgNDAuOTYxNTQsMTguMjMwNzcgNDAuOTYxNTQsNDAuOTYxNTR2ODAuNTM4NDZjMCwyMi43MDE5MiAtMTguMjMwNzcsNDAuOTYxNTQgLTQwLjk2MTU0LDQwLjk2MTU0aC04MC41Mzg0NmMtMjIuNzAxOTIsMCAtNDAuOTYxNTQsLTE4LjIzMDc3IC00MC45NjE1NCwtNDAuOTYxNTR2LTgwLjUzODQ2YzAsLTIyLjcwMTkyIDE4LjIzMDc3LC00MC45NjE1NCA0MC45NjE1NCwtNDAuOTYxNTR6TTE1MS4zODQ2MiwyOS41Mzg0NmMtNi4xMTUzOCwwIC0xMS4wNzY5Miw0Ljk2MTU0IC0xMS4wNzY5MiwxMS4wNzY5MmMwLDYuMTE1MzggNC45NjE1NCwxMS4wNzY5MiAxMS4wNzY5MiwxMS4wNzY5MmM2LjExNTM4LDAgMTEuMDc2OTIsLTQuOTYxNTQgMTEuMDc2OTIsLTExLjA3NjkyYzAsLTYuMTE1MzggLTQuOTYxNTQsLTExLjA3NjkyIC0xMS4wNzY5MiwtMTEuMDc2OTJ6TTk2LDQ0LjMwNzY5Yy0yOC40NzExNiwwIC01MS42OTIzMSwyMy4yMjExNSAtNTEuNjkyMzEsNTEuNjkyMzFjMCwyOC40NzExNiAyMy4yMjExNSw1MS42OTIzMSA1MS42OTIzMSw1MS42OTIzMWMyOC40NzExNiwwIDUxLjY5MjMxLC0yMy4yMjExNSA1MS42OTIzMSwtNTEuNjkyMzFjMCwtMjguNDcxMTYgLTIzLjIyMTE1LC01MS42OTIzMSAtNTEuNjkyMzEsLTUxLjY5MjMxek05Niw1OS4wNzY5MmMyMC40ODA3NywwIDM2LjkyMzA4LDE2LjQ0MjMxIDM2LjkyMzA4LDM2LjkyMzA4YzAsMjAuNDgwNzcgLTE2LjQ0MjMsMzYuOTIzMDggLTM2LjkyMzA4LDM2LjkyMzA4Yy0yMC40ODA3NywwIC0zNi45MjMwOCwtMTYuNDQyMyAtMzYuOTIzMDgsLTM2LjkyMzA4YzAsLTIwLjQ4MDc3IDE2LjQ0MjMxLC0zNi45MjMwOCAzNi45MjMwOCwtMzYuOTIzMDh6Ij48L3BhdGg+PC9nPjwvZz48L2c+PC9zdmc+">
+                                </a>
+                                <a class="p-2 fa-lg tw-ic">
+                                    <i class="fab fa-twitter"> </i>
+                                </a>
+                                <a class="p-2 fa-lg dribbble-ic">
+                                    <i class="fab fa-dribbble"> </i>
+                                </a>
+                            </div>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="view">
+                      <div class="full-bg-img flex-center mask rgba-purple-light white-text">
+                        <ul class="animated fadeInUp col-md-12 list-unstyled">
+                            <div class="avatar" style="display:flex;justify-content:center;">
+                              <img src="img/luiza_staff.jpg" class="rounded z-depth-1" alt="Sample avatar" width="200px" height="200px;">
+                            </div>
+                            <h1 class="font-weight-bold mb-3">Luiza Lessa</h1>
+                            <h3 class="font-weight-bold mb-3"></h3>
+                            <h3 class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic
+                            tenetur.</h3>
+                            <div style="display:flex;justify-content:center; align-content: center; align-items: center;">
+                                <a class="p-2 fa-lg fb-ic">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMjYiIGhlaWdodD0iMjYiCnZpZXdCb3g9IjAgMCAxOTIgMTkyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE5MnYtMTkyaDE5MnYxOTJ6IiBmaWxsPSJub25lIj48L3BhdGg+PGcgZmlsbD0iI2ZmZmZmZiI+PGcgaWQ9InN1cmZhY2UxIj48cGF0aCBkPSJNNTUuNzMwNzcsMGMtMzAuNjkyMzEsMCAtNTUuNzMwNzcsMjUuMDM4NDYgLTU1LjczMDc3LDU1LjczMDc3djgwLjUzODQ2YzAsMzAuNjkyMzEgMjUuMDM4NDYsNTUuNzMwNzcgNTUuNzMwNzcsNTUuNzMwNzdoODAuNTM4NDZjMzAuNjkyMzEsMCA1NS43MzA3NywtMjUuMDM4NDYgNTUuNzMwNzcsLTU1LjczMDc3di04MC41Mzg0NmMwLC0zMC42OTIzMSAtMjUuMDM4NDYsLTU1LjczMDc3IC01NS43MzA3NywtNTUuNzMwNzd6TTU1LjczMDc3LDE0Ljc2OTIzaDgwLjUzODQ2YzIyLjcwMTkyLDAgNDAuOTYxNTQsMTguMjMwNzcgNDAuOTYxNTQsNDAuOTYxNTR2ODAuNTM4NDZjMCwyMi43MDE5MiAtMTguMjMwNzcsNDAuOTYxNTQgLTQwLjk2MTU0LDQwLjk2MTU0aC04MC41Mzg0NmMtMjIuNzAxOTIsMCAtNDAuOTYxNTQsLTE4LjIzMDc3IC00MC45NjE1NCwtNDAuOTYxNTR2LTgwLjUzODQ2YzAsLTIyLjcwMTkyIDE4LjIzMDc3LC00MC45NjE1NCA0MC45NjE1NCwtNDAuOTYxNTR6TTE1MS4zODQ2MiwyOS41Mzg0NmMtNi4xMTUzOCwwIC0xMS4wNzY5Miw0Ljk2MTU0IC0xMS4wNzY5MiwxMS4wNzY5MmMwLDYuMTE1MzggNC45NjE1NCwxMS4wNzY5MiAxMS4wNzY5MiwxMS4wNzY5MmM2LjExNTM4LDAgMTEuMDc2OTIsLTQuOTYxNTQgMTEuMDc2OTIsLTExLjA3NjkyYzAsLTYuMTE1MzggLTQuOTYxNTQsLTExLjA3NjkyIC0xMS4wNzY5MiwtMTEuMDc2OTJ6TTk2LDQ0LjMwNzY5Yy0yOC40NzExNiwwIC01MS42OTIzMSwyMy4yMjExNSAtNTEuNjkyMzEsNTEuNjkyMzFjMCwyOC40NzExNiAyMy4yMjExNSw1MS42OTIzMSA1MS42OTIzMSw1MS42OTIzMWMyOC40NzExNiwwIDUxLjY5MjMxLC0yMy4yMjExNSA1MS42OTIzMSwtNTEuNjkyMzFjMCwtMjguNDcxMTYgLTIzLjIyMTE1LC01MS42OTIzMSAtNTEuNjkyMzEsLTUxLjY5MjMxek05Niw1OS4wNzY5MmMyMC40ODA3NywwIDM2LjkyMzA4LDE2LjQ0MjMxIDM2LjkyMzA4LDM2LjkyMzA4YzAsMjAuNDgwNzcgLTE2LjQ0MjMsMzYuOTIzMDggLTM2LjkyMzA4LDM2LjkyMzA4Yy0yMC40ODA3NywwIC0zNi45MjMwOCwtMTYuNDQyMyAtMzYuOTIzMDgsLTM2LjkyMzA4YzAsLTIwLjQ4MDc3IDE2LjQ0MjMxLC0zNi45MjMwOCAzNi45MjMwOCwtMzYuOTIzMDh6Ij48L3BhdGg+PC9nPjwvZz48L2c+PC9zdmc+">
+                                </a>
+                                <a class="p-2 fa-lg tw-ic">
+                                    <i class="fab fa-twitter"> </i>
+                                </a>
+                                <a class="p-2 fa-lg dribbble-ic">
+                                    <i class="fab fa-dribbble"> </i>
+                                </a>
+                            </div>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="view">
+                      <div class="full-bg-img flex-center mask rgba-blue-light white-text">
+                        <ul class="animated fadeInUp col-md-12 list-unstyled">
+                            <div class="avatar" style="display:flex;justify-content:center;">
+                              <img src="img/roberto_staff.jpg" class="rounded z-depth-1" alt="Sample avatar" width="200px" height="235px;">
+                            </div>
+                            <h1 class="font-weight-bold mb-3">Roberto Low</h1>
+                            <h3 class="font-weight-bold mb-3"></h3>
+                            <h3 class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic
+                            tenetur.</h3>
+                            <div style="display:flex;justify-content:center; align-content: center; align-items: center;">
+                                <a class="p-2 fa-lg fb-ic">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMjYiIGhlaWdodD0iMjYiCnZpZXdCb3g9IjAgMCAxOTIgMTkyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE5MnYtMTkyaDE5MnYxOTJ6IiBmaWxsPSJub25lIj48L3BhdGg+PGcgZmlsbD0iI2ZmZmZmZiI+PGcgaWQ9InN1cmZhY2UxIj48cGF0aCBkPSJNNTUuNzMwNzcsMGMtMzAuNjkyMzEsMCAtNTUuNzMwNzcsMjUuMDM4NDYgLTU1LjczMDc3LDU1LjczMDc3djgwLjUzODQ2YzAsMzAuNjkyMzEgMjUuMDM4NDYsNTUuNzMwNzcgNTUuNzMwNzcsNTUuNzMwNzdoODAuNTM4NDZjMzAuNjkyMzEsMCA1NS43MzA3NywtMjUuMDM4NDYgNTUuNzMwNzcsLTU1LjczMDc3di04MC41Mzg0NmMwLC0zMC42OTIzMSAtMjUuMDM4NDYsLTU1LjczMDc3IC01NS43MzA3NywtNTUuNzMwNzd6TTU1LjczMDc3LDE0Ljc2OTIzaDgwLjUzODQ2YzIyLjcwMTkyLDAgNDAuOTYxNTQsMTguMjMwNzcgNDAuOTYxNTQsNDAuOTYxNTR2ODAuNTM4NDZjMCwyMi43MDE5MiAtMTguMjMwNzcsNDAuOTYxNTQgLTQwLjk2MTU0LDQwLjk2MTU0aC04MC41Mzg0NmMtMjIuNzAxOTIsMCAtNDAuOTYxNTQsLTE4LjIzMDc3IC00MC45NjE1NCwtNDAuOTYxNTR2LTgwLjUzODQ2YzAsLTIyLjcwMTkyIDE4LjIzMDc3LC00MC45NjE1NCA0MC45NjE1NCwtNDAuOTYxNTR6TTE1MS4zODQ2MiwyOS41Mzg0NmMtNi4xMTUzOCwwIC0xMS4wNzY5Miw0Ljk2MTU0IC0xMS4wNzY5MiwxMS4wNzY5MmMwLDYuMTE1MzggNC45NjE1NCwxMS4wNzY5MiAxMS4wNzY5MiwxMS4wNzY5MmM2LjExNTM4LDAgMTEuMDc2OTIsLTQuOTYxNTQgMTEuMDc2OTIsLTExLjA3NjkyYzAsLTYuMTE1MzggLTQuOTYxNTQsLTExLjA3NjkyIC0xMS4wNzY5MiwtMTEuMDc2OTJ6TTk2LDQ0LjMwNzY5Yy0yOC40NzExNiwwIC01MS42OTIzMSwyMy4yMjExNSAtNTEuNjkyMzEsNTEuNjkyMzFjMCwyOC40NzExNiAyMy4yMjExNSw1MS42OTIzMSA1MS42OTIzMSw1MS42OTIzMWMyOC40NzExNiwwIDUxLjY5MjMxLC0yMy4yMjExNSA1MS42OTIzMSwtNTEuNjkyMzFjMCwtMjguNDcxMTYgLTIzLjIyMTE1LC01MS42OTIzMSAtNTEuNjkyMzEsLTUxLjY5MjMxek05Niw1OS4wNzY5MmMyMC40ODA3NywwIDM2LjkyMzA4LDE2LjQ0MjMxIDM2LjkyMzA4LDM2LjkyMzA4YzAsMjAuNDgwNzcgLTE2LjQ0MjMsMzYuOTIzMDggLTM2LjkyMzA4LDM2LjkyMzA4Yy0yMC40ODA3NywwIC0zNi45MjMwOCwtMTYuNDQyMyAtMzYuOTIzMDgsLTM2LjkyMzA4YzAsLTIwLjQ4MDc3IDE2LjQ0MjMxLC0zNi45MjMwOCAzNi45MjMwOCwtMzYuOTIzMDh6Ij48L3BhdGg+PC9nPjwvZz48L2c+PC9zdmc+">
+                                </a>
+                                <a class="p-2 fa-lg tw-ic">
+                                    <i class="fab fa-twitter"> </i>
+                                </a>
+                                <a class="p-2 fa-lg dribbble-ic">
+                                    <i class="fab fa-dribbble"> </i>
+                                </a>
+                            </div>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carousel-1" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <div style="margin-top:150px;margin-bottom:140px;">
+                <h1 class="h1-responsive font-weight-bold text-center my-5">Redaction</h1>
+            </div>
+            <div id="carousel-2" class="carousel slide carousel-fade" data-ride="carousel" data-interval="false">
+                <ol class="carousel-indicators">
+                  <li data-target="#carousel-2" data-slide-to="1" class="active"></li>
+                  <li data-target="#carousel-2" data-slide-to="2"></li>
+                  <li data-target="#carousel-2" data-slide-to="3"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                  <div class="carousel-item active" id="carousel-2-item">
+                    <div class="view">
+                      <div class="full-bg-img flex-center mask rgba-purple-light white-text">
+                        <ul class="animated fadeInUp col-md-12 list-unstyled list-inline">
+                            <div class="avatar" style="display:flex;justify-content:center;">
+                              <img src="img/ilona_staff.jpg" class="rounded z-depth-1" alt="Sample avatar" width="200px" height="250px;">
+                            </div>
+                            <h1 class="font-weight-bold mb-3">Ilona Lordier</h1>
+                            <h3 class="font-weight-bold mb-3"></h3>
+                            <h3 class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic
+                            tenetur.</h3>
+                            <div style="display:flex;justify-content:center; align-content: center; align-items: center;">
+                                <a class="p-2 fa-lg fb-ic">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMjYiIGhlaWdodD0iMjYiCnZpZXdCb3g9IjAgMCAxOTIgMTkyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE5MnYtMTkyaDE5MnYxOTJ6IiBmaWxsPSJub25lIj48L3BhdGg+PGcgZmlsbD0iI2ZmZmZmZiI+PGcgaWQ9InN1cmZhY2UxIj48cGF0aCBkPSJNNTUuNzMwNzcsMGMtMzAuNjkyMzEsMCAtNTUuNzMwNzcsMjUuMDM4NDYgLTU1LjczMDc3LDU1LjczMDc3djgwLjUzODQ2YzAsMzAuNjkyMzEgMjUuMDM4NDYsNTUuNzMwNzcgNTUuNzMwNzcsNTUuNzMwNzdoODAuNTM4NDZjMzAuNjkyMzEsMCA1NS43MzA3NywtMjUuMDM4NDYgNTUuNzMwNzcsLTU1LjczMDc3di04MC41Mzg0NmMwLC0zMC42OTIzMSAtMjUuMDM4NDYsLTU1LjczMDc3IC01NS43MzA3NywtNTUuNzMwNzd6TTU1LjczMDc3LDE0Ljc2OTIzaDgwLjUzODQ2YzIyLjcwMTkyLDAgNDAuOTYxNTQsMTguMjMwNzcgNDAuOTYxNTQsNDAuOTYxNTR2ODAuNTM4NDZjMCwyMi43MDE5MiAtMTguMjMwNzcsNDAuOTYxNTQgLTQwLjk2MTU0LDQwLjk2MTU0aC04MC41Mzg0NmMtMjIuNzAxOTIsMCAtNDAuOTYxNTQsLTE4LjIzMDc3IC00MC45NjE1NCwtNDAuOTYxNTR2LTgwLjUzODQ2YzAsLTIyLjcwMTkyIDE4LjIzMDc3LC00MC45NjE1NCA0MC45NjE1NCwtNDAuOTYxNTR6TTE1MS4zODQ2MiwyOS41Mzg0NmMtNi4xMTUzOCwwIC0xMS4wNzY5Miw0Ljk2MTU0IC0xMS4wNzY5MiwxMS4wNzY5MmMwLDYuMTE1MzggNC45NjE1NCwxMS4wNzY5MiAxMS4wNzY5MiwxMS4wNzY5MmM2LjExNTM4LDAgMTEuMDc2OTIsLTQuOTYxNTQgMTEuMDc2OTIsLTExLjA3NjkyYzAsLTYuMTE1MzggLTQuOTYxNTQsLTExLjA3NjkyIC0xMS4wNzY5MiwtMTEuMDc2OTJ6TTk2LDQ0LjMwNzY5Yy0yOC40NzExNiwwIC01MS42OTIzMSwyMy4yMjExNSAtNTEuNjkyMzEsNTEuNjkyMzFjMCwyOC40NzExNiAyMy4yMjExNSw1MS42OTIzMSA1MS42OTIzMSw1MS42OTIzMWMyOC40NzExNiwwIDUxLjY5MjMxLC0yMy4yMjExNSA1MS42OTIzMSwtNTEuNjkyMzFjMCwtMjguNDcxMTYgLTIzLjIyMTE1LC01MS42OTIzMSAtNTEuNjkyMzEsLTUxLjY5MjMxek05Niw1OS4wNzY5MmMyMC40ODA3NywwIDM2LjkyMzA4LDE2LjQ0MjMxIDM2LjkyMzA4LDM2LjkyMzA4YzAsMjAuNDgwNzcgLTE2LjQ0MjMsMzYuOTIzMDggLTM2LjkyMzA4LDM2LjkyMzA4Yy0yMC40ODA3NywwIC0zNi45MjMwOCwtMTYuNDQyMyAtMzYuOTIzMDgsLTM2LjkyMzA4YzAsLTIwLjQ4MDc3IDE2LjQ0MjMxLC0zNi45MjMwOCAzNi45MjMwOCwtMzYuOTIzMDh6Ij48L3BhdGg+PC9nPjwvZz48L2c+PC9zdmc+">
+                                </a>
+                                <a class="p-2 fa-lg tw-ic">
+                                    <i class="fab fa-twitter"> </i>
+                                </a>
+                                <a class="p-2 fa-lg dribbble-ic">
+                                    <i class="fab fa-dribbble"> </i>
+                                </a>
+                            </div>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item" id="carousel-2-item">
+                    <div class="view">
+                      <div class="full-bg-img flex-center mask rgba-purple-light white-text">
+                        <ul class="animated fadeInUp col-md-12 list-unstyled">
+                            <div class="avatar" style="display:flex;justify-content:center;">
+                              <img src="img/helena_staff.jpg" class="rounded z-depth-1" alt="Sample avatar" width="200px" height="250px;">
+                            </div>
+                            <h1 class="font-weight-bold mb-3">Helena Radnovic</h1>
+                            <h3 class="font-weight-bold mb-3"></h3>
+                            <h3 class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic
+                            tenetur.</h3>
+                            <div style="display:flex;justify-content:center; align-content: center; align-items: center;">
+                                <a class="p-2 fa-lg fb-ic">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMjYiIGhlaWdodD0iMjYiCnZpZXdCb3g9IjAgMCAxOTIgMTkyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE5MnYtMTkyaDE5MnYxOTJ6IiBmaWxsPSJub25lIj48L3BhdGg+PGcgZmlsbD0iI2ZmZmZmZiI+PGcgaWQ9InN1cmZhY2UxIj48cGF0aCBkPSJNNTUuNzMwNzcsMGMtMzAuNjkyMzEsMCAtNTUuNzMwNzcsMjUuMDM4NDYgLTU1LjczMDc3LDU1LjczMDc3djgwLjUzODQ2YzAsMzAuNjkyMzEgMjUuMDM4NDYsNTUuNzMwNzcgNTUuNzMwNzcsNTUuNzMwNzdoODAuNTM4NDZjMzAuNjkyMzEsMCA1NS43MzA3NywtMjUuMDM4NDYgNTUuNzMwNzcsLTU1LjczMDc3di04MC41Mzg0NmMwLC0zMC42OTIzMSAtMjUuMDM4NDYsLTU1LjczMDc3IC01NS43MzA3NywtNTUuNzMwNzd6TTU1LjczMDc3LDE0Ljc2OTIzaDgwLjUzODQ2YzIyLjcwMTkyLDAgNDAuOTYxNTQsMTguMjMwNzcgNDAuOTYxNTQsNDAuOTYxNTR2ODAuNTM4NDZjMCwyMi43MDE5MiAtMTguMjMwNzcsNDAuOTYxNTQgLTQwLjk2MTU0LDQwLjk2MTU0aC04MC41Mzg0NmMtMjIuNzAxOTIsMCAtNDAuOTYxNTQsLTE4LjIzMDc3IC00MC45NjE1NCwtNDAuOTYxNTR2LTgwLjUzODQ2YzAsLTIyLjcwMTkyIDE4LjIzMDc3LC00MC45NjE1NCA0MC45NjE1NCwtNDAuOTYxNTR6TTE1MS4zODQ2MiwyOS41Mzg0NmMtNi4xMTUzOCwwIC0xMS4wNzY5Miw0Ljk2MTU0IC0xMS4wNzY5MiwxMS4wNzY5MmMwLDYuMTE1MzggNC45NjE1NCwxMS4wNzY5MiAxMS4wNzY5MiwxMS4wNzY5MmM2LjExNTM4LDAgMTEuMDc2OTIsLTQuOTYxNTQgMTEuMDc2OTIsLTExLjA3NjkyYzAsLTYuMTE1MzggLTQuOTYxNTQsLTExLjA3NjkyIC0xMS4wNzY5MiwtMTEuMDc2OTJ6TTk2LDQ0LjMwNzY5Yy0yOC40NzExNiwwIC01MS42OTIzMSwyMy4yMjExNSAtNTEuNjkyMzEsNTEuNjkyMzFjMCwyOC40NzExNiAyMy4yMjExNSw1MS42OTIzMSA1MS42OTIzMSw1MS42OTIzMWMyOC40NzExNiwwIDUxLjY5MjMxLC0yMy4yMjExNSA1MS42OTIzMSwtNTEuNjkyMzFjMCwtMjguNDcxMTYgLTIzLjIyMTE1LC01MS42OTIzMSAtNTEuNjkyMzEsLTUxLjY5MjMxek05Niw1OS4wNzY5MmMyMC40ODA3NywwIDM2LjkyMzA4LDE2LjQ0MjMxIDM2LjkyMzA4LDM2LjkyMzA4YzAsMjAuNDgwNzcgLTE2LjQ0MjMsMzYuOTIzMDggLTM2LjkyMzA4LDM2LjkyMzA4Yy0yMC40ODA3NywwIC0zNi45MjMwOCwtMTYuNDQyMyAtMzYuOTIzMDgsLTM2LjkyMzA4YzAsLTIwLjQ4MDc3IDE2LjQ0MjMxLC0zNi45MjMwOCAzNi45MjMwOCwtMzYuOTIzMDh6Ij48L3BhdGg+PC9nPjwvZz48L2c+PC9zdmc+">
+                                </a>
+                                <a class="p-2 fa-lg tw-ic">
+                                    <i class="fab fa-twitter"> </i>
+                                </a>
+                                <a class="p-2 fa-lg dribbble-ic">
+                                    <i class="fab fa-dribbble"> </i>
+                                </a>
+                            </div>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item" id="carousel-2-item">
+                    <div class="view">
+                      <div class="full-bg-img flex-center mask rgba-blue-light white-text">
+                        <ul class="animated fadeInUp col-md-12 list-unstyled">
+                            <div class="avatar" style="display:flex;justify-content:center;">
+                              <img src="img/fogg-page-not-found.png" class="rounded z-depth-1" alt="Sample avatar" width="200px" height="235px;">
+                            </div>
+                            <h1 class="font-weight-bold mb-3">Pedro Steff</h1>
+                            <h3 class="font-weight-bold mb-3"></h3>
+                            <h3 class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic
+                            tenetur.</h3>
+                            <div style="display:flex;justify-content:center; align-content: center; align-items: center;">
+                                <a class="p-2 fa-lg fb-ic">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMjYiIGhlaWdodD0iMjYiCnZpZXdCb3g9IjAgMCAxOTIgMTkyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE5MnYtMTkyaDE5MnYxOTJ6IiBmaWxsPSJub25lIj48L3BhdGg+PGcgZmlsbD0iI2ZmZmZmZiI+PGcgaWQ9InN1cmZhY2UxIj48cGF0aCBkPSJNNTUuNzMwNzcsMGMtMzAuNjkyMzEsMCAtNTUuNzMwNzcsMjUuMDM4NDYgLTU1LjczMDc3LDU1LjczMDc3djgwLjUzODQ2YzAsMzAuNjkyMzEgMjUuMDM4NDYsNTUuNzMwNzcgNTUuNzMwNzcsNTUuNzMwNzdoODAuNTM4NDZjMzAuNjkyMzEsMCA1NS43MzA3NywtMjUuMDM4NDYgNTUuNzMwNzcsLTU1LjczMDc3di04MC41Mzg0NmMwLC0zMC42OTIzMSAtMjUuMDM4NDYsLTU1LjczMDc3IC01NS43MzA3NywtNTUuNzMwNzd6TTU1LjczMDc3LDE0Ljc2OTIzaDgwLjUzODQ2YzIyLjcwMTkyLDAgNDAuOTYxNTQsMTguMjMwNzcgNDAuOTYxNTQsNDAuOTYxNTR2ODAuNTM4NDZjMCwyMi43MDE5MiAtMTguMjMwNzcsNDAuOTYxNTQgLTQwLjk2MTU0LDQwLjk2MTU0aC04MC41Mzg0NmMtMjIuNzAxOTIsMCAtNDAuOTYxNTQsLTE4LjIzMDc3IC00MC45NjE1NCwtNDAuOTYxNTR2LTgwLjUzODQ2YzAsLTIyLjcwMTkyIDE4LjIzMDc3LC00MC45NjE1NCA0MC45NjE1NCwtNDAuOTYxNTR6TTE1MS4zODQ2MiwyOS41Mzg0NmMtNi4xMTUzOCwwIC0xMS4wNzY5Miw0Ljk2MTU0IC0xMS4wNzY5MiwxMS4wNzY5MmMwLDYuMTE1MzggNC45NjE1NCwxMS4wNzY5MiAxMS4wNzY5MiwxMS4wNzY5MmM2LjExNTM4LDAgMTEuMDc2OTIsLTQuOTYxNTQgMTEuMDc2OTIsLTExLjA3NjkyYzAsLTYuMTE1MzggLTQuOTYxNTQsLTExLjA3NjkyIC0xMS4wNzY5MiwtMTEuMDc2OTJ6TTk2LDQ0LjMwNzY5Yy0yOC40NzExNiwwIC01MS42OTIzMSwyMy4yMjExNSAtNTEuNjkyMzEsNTEuNjkyMzFjMCwyOC40NzExNiAyMy4yMjExNSw1MS42OTIzMSA1MS42OTIzMSw1MS42OTIzMWMyOC40NzExNiwwIDUxLjY5MjMxLC0yMy4yMjExNSA1MS42OTIzMSwtNTEuNjkyMzFjMCwtMjguNDcxMTYgLTIzLjIyMTE1LC01MS42OTIzMSAtNTEuNjkyMzEsLTUxLjY5MjMxek05Niw1OS4wNzY5MmMyMC40ODA3NywwIDM2LjkyMzA4LDE2LjQ0MjMxIDM2LjkyMzA4LDM2LjkyMzA4YzAsMjAuNDgwNzcgLTE2LjQ0MjMsMzYuOTIzMDggLTM2LjkyMzA4LDM2LjkyMzA4Yy0yMC40ODA3NywwIC0zNi45MjMwOCwtMTYuNDQyMyAtMzYuOTIzMDgsLTM2LjkyMzA4YzAsLTIwLjQ4MDc3IDE2LjQ0MjMxLC0zNi45MjMwOCAzNi45MjMwOCwtMzYuOTIzMDh6Ij48L3BhdGg+PC9nPjwvZz48L2c+PC9zdmc+">
+                                </a>
+                                <a class="p-2 fa-lg tw-ic">
+                                    <i class="fab fa-twitter"> </i>
+                                </a>
+                                <a class="p-2 fa-lg dribbble-ic">
+                                    <i class="fab fa-dribbble"> </i>
+                                </a>
+                            </div>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item" id="carousel-2-item">
+                    <div class="view">
+                      <div class="full-bg-img flex-center mask rgba-blue-light white-text">
+                        <ul class="animated fadeInUp col-md-12 list-unstyled">
+                            <div class="avatar" style="display:flex;justify-content:center;">
+                              <img src="img/fogg-page-not-found.png" class="rounded z-depth-1" alt="Sample avatar" width="200px" height="235px;">
+                            </div>
+                            <h1 class="font-weight-bold mb-3">Enrique Freitas</h1>
+                            <h3 class="font-weight-bold mb-3"></h3>
+                            <h3 class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic
+                            tenetur.</h3>
+                            <div style="display:flex;justify-content:center; align-content: center; align-items: center;">
+                                <a class="p-2 fa-lg fb-ic">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMjYiIGhlaWdodD0iMjYiCnZpZXdCb3g9IjAgMCAxOTIgMTkyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE5MnYtMTkyaDE5MnYxOTJ6IiBmaWxsPSJub25lIj48L3BhdGg+PGcgZmlsbD0iI2ZmZmZmZiI+PGcgaWQ9InN1cmZhY2UxIj48cGF0aCBkPSJNNTUuNzMwNzcsMGMtMzAuNjkyMzEsMCAtNTUuNzMwNzcsMjUuMDM4NDYgLTU1LjczMDc3LDU1LjczMDc3djgwLjUzODQ2YzAsMzAuNjkyMzEgMjUuMDM4NDYsNTUuNzMwNzcgNTUuNzMwNzcsNTUuNzMwNzdoODAuNTM4NDZjMzAuNjkyMzEsMCA1NS43MzA3NywtMjUuMDM4NDYgNTUuNzMwNzcsLTU1LjczMDc3di04MC41Mzg0NmMwLC0zMC42OTIzMSAtMjUuMDM4NDYsLTU1LjczMDc3IC01NS43MzA3NywtNTUuNzMwNzd6TTU1LjczMDc3LDE0Ljc2OTIzaDgwLjUzODQ2YzIyLjcwMTkyLDAgNDAuOTYxNTQsMTguMjMwNzcgNDAuOTYxNTQsNDAuOTYxNTR2ODAuNTM4NDZjMCwyMi43MDE5MiAtMTguMjMwNzcsNDAuOTYxNTQgLTQwLjk2MTU0LDQwLjk2MTU0aC04MC41Mzg0NmMtMjIuNzAxOTIsMCAtNDAuOTYxNTQsLTE4LjIzMDc3IC00MC45NjE1NCwtNDAuOTYxNTR2LTgwLjUzODQ2YzAsLTIyLjcwMTkyIDE4LjIzMDc3LC00MC45NjE1NCA0MC45NjE1NCwtNDAuOTYxNTR6TTE1MS4zODQ2MiwyOS41Mzg0NmMtNi4xMTUzOCwwIC0xMS4wNzY5Miw0Ljk2MTU0IC0xMS4wNzY5MiwxMS4wNzY5MmMwLDYuMTE1MzggNC45NjE1NCwxMS4wNzY5MiAxMS4wNzY5MiwxMS4wNzY5MmM2LjExNTM4LDAgMTEuMDc2OTIsLTQuOTYxNTQgMTEuMDc2OTIsLTExLjA3NjkyYzAsLTYuMTE1MzggLTQuOTYxNTQsLTExLjA3NjkyIC0xMS4wNzY5MiwtMTEuMDc2OTJ6TTk2LDQ0LjMwNzY5Yy0yOC40NzExNiwwIC01MS42OTIzMSwyMy4yMjExNSAtNTEuNjkyMzEsNTEuNjkyMzFjMCwyOC40NzExNiAyMy4yMjExNSw1MS42OTIzMSA1MS42OTIzMSw1MS42OTIzMWMyOC40NzExNiwwIDUxLjY5MjMxLC0yMy4yMjExNSA1MS42OTIzMSwtNTEuNjkyMzFjMCwtMjguNDcxMTYgLTIzLjIyMTE1LC01MS42OTIzMSAtNTEuNjkyMzEsLTUxLjY5MjMxek05Niw1OS4wNzY5MmMyMC40ODA3NywwIDM2LjkyMzA4LDE2LjQ0MjMxIDM2LjkyMzA4LDM2LjkyMzA4YzAsMjAuNDgwNzcgLTE2LjQ0MjMsMzYuOTIzMDggLTM2LjkyMzA4LDM2LjkyMzA4Yy0yMC40ODA3NywwIC0zNi45MjMwOCwtMTYuNDQyMyAtMzYuOTIzMDgsLTM2LjkyMzA4YzAsLTIwLjQ4MDc3IDE2LjQ0MjMxLC0zNi45MjMwOCAzNi45MjMwOCwtMzYuOTIzMDh6Ij48L3BhdGg+PC9nPjwvZz48L2c+PC9zdmc+">
+                                </a>
+                                <a class="p-2 fa-lg tw-ic">
+                                    <i class="fab fa-twitter"> </i>
+                                </a>
+                                <a class="p-2 fa-lg dribbble-ic">
+                                    <i class="fab fa-dribbble"> </i>
+                                </a>
+                            </div>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carousel-2" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carousel-2" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <div style="margin-top:150px;margin-bottom:140px;">
+                <h1 class="h1-responsive font-weight-bold text-center my-5">Réalization</h1>
+            </div>
+            <div id="carousel-3" class="carousel slide carousel-fade" data-ride="carousel" data-interval="false">
+                <ol class="carousel-indicators">
+                  <li data-target="#carousel-3" data-slide-to="1" class="active"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                  <div class="carousel-item active" id="carousel-3-item">
+                    <div class="view">
+                      <div class="full-bg-img flex-center mask rgba-blue-light white-text">
+                        <ul class="animated fadeInUp col-md-12 list-unstyled list-inline">
+                            <div class="avatar" style="display:flex;justify-content:center;">
+                              <img src="img/victor_gomez.jpg" class="rounded z-depth-1" alt="Sample avatar" width="200px" height="270px;">
+                            </div>
+                            <h1 class="font-weight-bold mb-3">Victor Rosa Gomez</h1>
+                            <h3 class="font-weight-bold mb-3"></h3>
+                            <h3 class="">Devellopeur du site web</h3>
+                            <div style="display:flex;justify-content:center; align-content: center; align-items: center;">
+                                <a class="p-2 fa-lg fb-ic">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMjYiIGhlaWdodD0iMjYiCnZpZXdCb3g9IjAgMCAxOTIgMTkyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE5MnYtMTkyaDE5MnYxOTJ6IiBmaWxsPSJub25lIj48L3BhdGg+PGcgZmlsbD0iI2ZmZmZmZiI+PGcgaWQ9InN1cmZhY2UxIj48cGF0aCBkPSJNNTUuNzMwNzcsMGMtMzAuNjkyMzEsMCAtNTUuNzMwNzcsMjUuMDM4NDYgLTU1LjczMDc3LDU1LjczMDc3djgwLjUzODQ2YzAsMzAuNjkyMzEgMjUuMDM4NDYsNTUuNzMwNzcgNTUuNzMwNzcsNTUuNzMwNzdoODAuNTM4NDZjMzAuNjkyMzEsMCA1NS43MzA3NywtMjUuMDM4NDYgNTUuNzMwNzcsLTU1LjczMDc3di04MC41Mzg0NmMwLC0zMC42OTIzMSAtMjUuMDM4NDYsLTU1LjczMDc3IC01NS43MzA3NywtNTUuNzMwNzd6TTU1LjczMDc3LDE0Ljc2OTIzaDgwLjUzODQ2YzIyLjcwMTkyLDAgNDAuOTYxNTQsMTguMjMwNzcgNDAuOTYxNTQsNDAuOTYxNTR2ODAuNTM4NDZjMCwyMi43MDE5MiAtMTguMjMwNzcsNDAuOTYxNTQgLTQwLjk2MTU0LDQwLjk2MTU0aC04MC41Mzg0NmMtMjIuNzAxOTIsMCAtNDAuOTYxNTQsLTE4LjIzMDc3IC00MC45NjE1NCwtNDAuOTYxNTR2LTgwLjUzODQ2YzAsLTIyLjcwMTkyIDE4LjIzMDc3LC00MC45NjE1NCA0MC45NjE1NCwtNDAuOTYxNTR6TTE1MS4zODQ2MiwyOS41Mzg0NmMtNi4xMTUzOCwwIC0xMS4wNzY5Miw0Ljk2MTU0IC0xMS4wNzY5MiwxMS4wNzY5MmMwLDYuMTE1MzggNC45NjE1NCwxMS4wNzY5MiAxMS4wNzY5MiwxMS4wNzY5MmM2LjExNTM4LDAgMTEuMDc2OTIsLTQuOTYxNTQgMTEuMDc2OTIsLTExLjA3NjkyYzAsLTYuMTE1MzggLTQuOTYxNTQsLTExLjA3NjkyIC0xMS4wNzY5MiwtMTEuMDc2OTJ6TTk2LDQ0LjMwNzY5Yy0yOC40NzExNiwwIC01MS42OTIzMSwyMy4yMjExNSAtNTEuNjkyMzEsNTEuNjkyMzFjMCwyOC40NzExNiAyMy4yMjExNSw1MS42OTIzMSA1MS42OTIzMSw1MS42OTIzMWMyOC40NzExNiwwIDUxLjY5MjMxLC0yMy4yMjExNSA1MS42OTIzMSwtNTEuNjkyMzFjMCwtMjguNDcxMTYgLTIzLjIyMTE1LC01MS42OTIzMSAtNTEuNjkyMzEsLTUxLjY5MjMxek05Niw1OS4wNzY5MmMyMC40ODA3NywwIDM2LjkyMzA4LDE2LjQ0MjMxIDM2LjkyMzA4LDM2LjkyMzA4YzAsMjAuNDgwNzcgLTE2LjQ0MjMsMzYuOTIzMDggLTM2LjkyMzA4LDM2LjkyMzA4Yy0yMC40ODA3NywwIC0zNi45MjMwOCwtMTYuNDQyMyAtMzYuOTIzMDgsLTM2LjkyMzA4YzAsLTIwLjQ4MDc3IDE2LjQ0MjMxLC0zNi45MjMwOCAzNi45MjMwOCwtMzYuOTIzMDh6Ij48L3BhdGg+PC9nPjwvZz48L2c+PC9zdmc+">
+                                </a>
+                                <a class="p-2 fa-lg tw-ic" href="../SitePessoal/index.html">
+                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                        width="50" height="50"
+                                        viewBox="0 0 192 192"
+                                        style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,192v-192h192v192z" fill="none"></path><g fill="#ffffff"><path d="M18.6075,23.04c-6.0288,0 -10.9275,4.8987 -10.9275,10.9275v35.1525h176.64v-35.1525c0,-6.0288 -4.8987,-10.9275 -10.9275,-10.9275zM30.72,38.4c4.23936,0 7.68,3.4368 7.68,7.68c0,4.23936 -3.44064,7.68 -7.68,7.68c-4.23936,0 -7.68,-3.44064 -7.68,-7.68c0,-4.2432 3.44064,-7.68 7.68,-7.68zM53.76,38.4c4.23936,0 7.68,3.4368 7.68,7.68c0,4.23936 -3.44064,7.68 -7.68,7.68c-4.23936,0 -7.68,-3.44064 -7.68,-7.68c0,-4.2432 3.44064,-7.68 7.68,-7.68zM72.96,38.4h92.16v15.36h-92.16zM7.68,76.8v88.32c0,2.12352 1.71648,3.84 3.84,3.84h168.96c2.12352,0 3.84,-1.71648 3.84,-3.84v-88.32zM30.72,92.16h76.8v19.2h-76.8zM126.72,92.16h34.56v53.76h-34.56zM30.72,126.72h76.8v19.2h-76.8z"></path></g></g></svg>
+                                </a>
+                                <a class="p-2 fa-lg dribbble-ic">
+                                    <i class="fab fa-dribbble"> </i>
+                                </a>
+                            </div>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carousel-3" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carousel-3" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <div style="margin-top:150px;margin-bottom:140px;">
+              <h1 class="h1-responsive font-weight-bold text-center my-5">----------------//----------------</h1>
+            </div>
+        </div>
+        <footer class="page-footer font-small blue pt-4">
+          <div class="container-fluid text-center text-md-left">
+            <div class="row">
+              <div class="col-md-6 mt-md-0 mt-3">
+                <h5 class="text-uppercase">ZPN</h5>
+                <p>Ce site est en marche seulement grace a des nombreuses personnes qui publient toutes les semaines ce contenu et aussi a des technologies.<br> Voyez ici le link pour notre equipe et les technologies utilisés.</p>
+              </div>
+              <hr class="clearfix w-100 d-md-none pb-3">
+              <div class="col-md-3 mb-md-0 mb-3">
+                  <h5 class="text-uppercase">Links du site</h5>
+                  <ul class="list-unstyled">
+                    <li>
+                      <a  href="#" >Sur Nous</a>
+                    </li>
+                    <li>
+                      <a href="contact_us.html">Contact</a>
+                    </li>
+                    <li>
+                      <a href="#!">Page d'administration</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-3 mb-md-0 mb-3">
+                  <h5 class="text-uppercase">Technologies utilisés dans le site</h5>
+                  <ul class="list-unstyled">
+                    <li>
+                      <a href="https://icons8.com/">Icons8</a>
+                    </li>
+                    <li>
+                      <a href="https://mdbootstrap.com/">MDB (Material Desing Bootstrap)</a>
+                    </li>
+                    <li>
+                      <a href="https://jquery.com/">Jquery/Ajax</a>
+                    </li>
+                  </ul>
+                </div>
+            </div>
+          </div>
+          <div class="footer-copyright text-center py-3">ZHE PASTEUR NEWS:
+            <a href="index.html"> ZPN</a>
+          </div>
+        </footer>   
+    </body>
+    <script>
+        $( "body" ).scroll(function () {
+            var scrollTop     = $(window).scrollTop(),
+            elementOffset = $('.viewHeader').offset().top,
+            distance      = (elementOffset - scrollTop);
+          $(".scrolling-navbar").toggleClass("top-nav-collapse", distance < -200);
+        });
+        $(document).ready(function(){
+          $.ajax({
+            url : "php/verify_if_on.php",
+            type: "POST",
+            success: function( results ){
+              var obj=$.parseJSON(results); 
+              $("#userAvatarDiv").empty();
+              $("#modalLRForm").empty();
+              $("#userAvatarDiv").append(obj.LoginAvatarResult);
+              $("#modalLRForm").append(obj.Login_Account_CreateFormsresult);
+            }
+          });
+        });
+    </script>
+</html>

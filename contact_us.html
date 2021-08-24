@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <link rel="stylesheet" href="css/shared_css.css">
+        <link href="MDB/css/bootstrap.css" rel="stylesheet">
+        <link href="MDB/css/mdb.css" rel="stylesheet">
+        <link href="css/bootstrap_css.css" rel="stylesheet">
+        <link href="MDB/css/mdb.lite.css" rel="stylesheet">
+        <link href="MDB/css/style.css" rel="stylesheet">
+        <link href="MDB/css/modules/animations-extended.css" rel="stylesheet">
+        <script href="MDB/scss/mdb.scss" rel="stylesheet"></script>
+        <script href="MDB/scss/mdb.lite.scss"></script>
+        <script href="MDB/scss/free/_navbars.scss"></script>
+        <script href="MDB/scss/free/_dropdowns.scss"></script>
+        <script href="MDB/scss/free/modules/animations-extended/_module.scss"></script>
+        <script href="MDB/scss/free/modules/animations-extended/animations-extended.scss"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="MDB/js/mdb.min.js"></script>
+        <script src="MDB/js/modules/scrolling-navbar.js"></script>
+        <script src="MDB/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog cascading-modal" role="document">
+              <div class="modal-content">
+                <div class="modal-c-tabs">
+                  <ul class="nav nav-tabs md-tabs tabs-2" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link blue-gradient active text-white" data-toggle="tab" href="#panel7" role="tab">
+                        Faire Login</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link blue-gradient text-white" data-toggle="tab" href="#panel8" role="tab">
+                        Créer un compte</a>
+                    </li>
+                  </ul>
+                  <div class="tab-content">
+                    <!--Login pannel-->
+                    <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+                      <div class="modal-body mb-1 text-center">
+                          <p class="h4 mb-4 text-danger"></p>
+                          <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Login">
+                            <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+                            <div class="d-flex justify-content-around">
+                              <div>
+                                  <div class="custom-control custom-checkbox">
+                                      <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+                                      <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+                                  </div>
+                              </div>
+                              <div>
+                                  <a href="">Mot-de-passe oblié ?</a>
+                              </div>
+                          </div>
+                          <button class="btn btn-info btn-block my-4 blue-gradient" id="submit_login" type="submit">Sign in</button>
+                      </div>
+                      <div class="modal-footer">
+                          <button class="btn blue-gradient text-white" data-dismiss="modal">Fermer</button>
+                      </div>
+                    </div>
+                    <script>
+                        $("#submit_login").click(function() {
+                            var user_name = $("#defaultLoginFormEmail").val();
+                            var password = $("#defaultLoginFormPassword").val();
+                            $.ajax({
+                              url : "php/login_verify.php",
+                              type: "POST",
+                              data:{
+                                user_name: user_name,
+                                password: password
+                              },
+                              success: function( results ){
+                                var obj=$.parseJSON(results); 
+                                $("#userAvatarDiv").empty();
+                                $("#modalLRForm").empty();
+                                $("#userAvatarDiv").append(obj.LoginAvatarResult);
+                                $("#modalLRForm").append(obj.LoginFormresult);
+                              }
+                            });
+                        });
+                    </script>
+                    <!--Create account pannel-->
+                    <div class="tab-pane fade" id="panel8" role="tabpanel">
+                      <div class="modal-body">
+                        <p class="h4 mb-4 text-danger"></p>
+                        <div class="form-row mb-4">
+                          <div class="col">
+                              <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Prénom">
+                          </div>
+                          <div class="col">
+                              <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Nom">
+                          </div>
+                        </div>
+                        <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="Adresse mail">
+                        <input type="text" id="defaultRegisterFormLogin" class="form-control mb-4" placeholder="Utilisateur">
+                        <input type="password" id="defaultRegisterFormPassword" class="form-control mb-4" placeholder="Mot-de-passe" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+                        <input type="password" id="defaultRegisterFormPasswordVerification" class="form-control mb-4" placeholder="Mot-de-passe" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">Image</span>
+                          </div>
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                            <label class="custom-file-label" for="inputGroupFile01">Choisiser une image</label>
+                          </div>
+                        </div>
+                        <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
+                            Optionel - Image de profil
+                        </small>
+                        <button id="submit_new_account" class="btn btn-info my-4 btn-block blue-gradient" type="submit">Créer compte</button>
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn blue-gradient text-white" data-dismiss="modal">Fermer</button>
+                      </div>
+                      <script>
+                        $("#submit_new_account").click(function() {
+                            var new_firstName = $("#defaultRegisterFormFirstName").val();
+                            var new_lastName = $("#defaultRegisterFormLastName").val();
+                            var new_email = $("#defaultRegisterFormEmail").val();
+                            var new_login = $("#defaultRegisterFormLogin").val();
+                            var new_password = $("#defaultRegisterFormPassword").val();
+                            var new_password_verification = $("#defaultRegisterFormPasswordVerification").val();
+                            var new_phone = $("#defaultRegisterPhonePassword").val();
+                            $.ajax({
+                              url : "php/new_account.php",
+                              type: "POST",
+                              data:{
+                                new_firstName : new_firstName,
+                                new_lastName : new_lastName,
+                                new_email : new_email,
+                                new_login : new_login,
+                                new_password : new_password,
+                                new_password_verification : new_password_verification
+                              },
+                              success: function( results ){
+                                var obj=$.parseJSON(results); 
+                                $("#userAvatarDiv").empty();
+                                $("#modalLRForm").empty();
+                                $("#userAvatarDiv").append(obj.LoginAvatarResult);
+                                $("#modalLRForm").append(obj.Login_Account_CreateFormsresult);
+                              }
+                            });
+                        });
+                      </script>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <header>
+          <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+            <a class="navbar-brand" href="index.html"><strong>Z.P.N.</strong></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a  class="nav-link" href="index.html" >Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#" >Chercher</a>
+                </li>
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"
+                          aria-haspopup="true" aria-expanded="false">Types d'articles</a>
+                        <div class="dropdown-menu dropdown-primary">
+                          <a class="dropdown-item" href="#">Résumés</a>
+                          <a class="dropdown-item" href="#">Histoires</a>
+                          <a class="dropdown-item" href="#">Lycée Pasteur</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                  <a  class="nav-link" href="about_us.html" >Sur nous</a>
+                </li>
+                <li class="nav-item active">
+                  <a  class="nav-link" href="contact_us.html" >Contact <span class="sr-only">(current)</span></a>
+                </li>
+              </ul>
+              <ul class="navbar-nav ml-auto nav-flex-icons" style="justify-content:center;">
+                  <li class="nav-item avatar dropdown" id="userAvatarDiv">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="false">
+                      <img src="https://img.icons8.com/cotton/64/000000/gender-neutral-user.png" class="rounded-circle img-fluid" alt="avatar image" style="width: 50px; height: 50px; margin-left: 20px;">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-55">
+                      <a id="submit_login" class="nav-link text-info" data-toggle="modal" data-target="#modalLRForm" >Login/Créer un compte</a>
+                    </div>
+                  </li>
+              </ul>
+            </div>
+          </nav>
+            <div class="view viewHeader intro-2">
+              <div class="full-bg-img">
+                <div class="mask rgba-blue-light flex-center">
+                  <div style="font-size: calc(1.525rem + 1.3vw) !important;" class="container text-center white-text wow fadeInUp">
+                    <h1>Zhe Pasteur news</h1>
+                    <br>
+                    <h3>Contactez nous</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </header>
+        <section class="mb-4" id="content_contact_page">
+          <div id="content_organization_contact_page">
+            <h2 class="h1-responsive font-weight-bold text-center my-4">Contacter nous</h2>
+            <p class="text-center w-responsive mx-auto mb-5">Avez vous une sugestion, une reclamation, un probleme, autre chose ?</p>
+            <div class="row">
+                <div class="col-md-9 mb-md-0 mb-5">
+                    <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="md-form mb-0">
+                                    <input type="text" id="name" name="name" class="form-control">
+                                    <label for="name" class="">Votre Prénom et Nom</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="md-form mb-0">
+                                    <input type="text" id="email" name="email" class="form-control">
+                                    <label for="email" class="">Votre adresse Email</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="md-form mb-0">
+                                    <input type="text" id="subject" name="subject" class="form-control">
+                                    <label for="subject" class="">Sujet</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="md-form">
+                                    <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
+                                    <label for="message">Votre message</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="text-center text-md-left">
+                        <a class="btn btn-primary" id="button_submit_msg">Envoyer</a>
+                    </div>
+                    <div class="status"></div>
+                </div>
+            </div>
+          </div>
+        </section>        
+        <footer class="page-footer font-small blue pt-4">
+          <div class="container-fluid text-center text-md-left">
+            <div class="row">
+              <div class="col-md-6 mt-md-0 mt-3">
+                <h5 class="text-uppercase">ZPN</h5>
+                <p>Ce site est en marche seulement grace a des nombreuses personnes qui publient toutes les semaines ce contenu et aussi a des technologies.<br> Voyez ici le link pour notre equipe et les technologies utilisés.</p>
+              </div>
+              <hr class="clearfix w-100 d-md-none pb-3">
+              <div class="col-md-3 mb-md-0 mb-3">
+                  <h5 class="text-uppercase">Links du site</h5>
+                  <ul class="list-unstyled">
+                    <li>
+                      <a  href="#" >Sur Nous</a>
+                    </li>
+                    <li>
+                      <a href="contact_us.html">Contact</a>
+                    </li>
+                    <li>
+                      <a href="#!">Page d'administration</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-3 mb-md-0 mb-3">
+                  <h5 class="text-uppercase">Technologies utilisés dans le site</h5>
+                  <ul class="list-unstyled">
+                    <li>
+                      <a href="https://icons8.com/">Icons8</a>
+                    </li>
+                    <li>
+                      <a href="https://mdbootstrap.com/">MDB (Material Desing Bootstrap)</a>
+                    </li>
+                    <li>
+                      <a href="https://jquery.com/">Jquery/Ajax</a>
+                    </li>
+                  </ul>
+                </div>
+            </div>
+          </div>
+          <div class="footer-copyright text-center py-3">ZHE PASTEUR NEWS:
+            <a href="index.html"> ZPN</a>
+          </div>
+        </footer>   
+    </body>
+    <script>
+        $( "body" ).scroll(function () {
+            var scrollTop     = $(window).scrollTop(),
+            elementOffset = $('.viewHeader').offset().top,
+            distance      = (elementOffset - scrollTop);
+          $(".scrolling-navbar").toggleClass("top-nav-collapse", distance < -200);
+        });
+        $("#button_submit_msg").click(function() {
+            $("#status").append("Sending...");
+            formData = {
+                'name'     : $('input[name=name]').val(),
+                'email'    : $('input[name=email]').val(),
+                'subject'  : $('input[name=subject]').val(),
+                'message'  : $('textarea[name=message]').val()
+            };
+            $.ajax({
+              url : "mai.php",
+              type: "POST",
+              data : formData,
+              success: function(data, textStatus, jqXHR){
+                  $('#status').text(data.message);
+                  if (data.code)
+                  $('#contact-form').closest('form').find("input[type=text], textarea").val("");
+              },error: function (jqXHR, textStatus, errorThrown){
+                  $('#status').text(jqXHR);
+              }
+            });
+        });
+        $(document).ready(function(){
+          $.ajax({
+            url : "php/verify_if_on.php",
+            type: "POST",
+            success: function( results ){
+              var obj=$.parseJSON(results); 
+              $("#userAvatarDiv").empty();
+              $("#modalLRForm").empty();
+              $("#userAvatarDiv").append(obj.LoginAvatarResult);
+              $("#modalLRForm").append(obj.Login_Account_CreateFormsresult);
+            }
+          });
+        });
+    </script>
+</html>

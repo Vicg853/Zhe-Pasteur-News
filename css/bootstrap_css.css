@@ -1,0 +1,118 @@
+.viewHeader {
+    background: url("../img/cityview.jpg") no-repeat center center;
+    background-size: cover;
+}
+
+.navbar {
+    background-color: transparent;
+    width: 100vw !important;
+}
+
+.top-nav-collapse {
+    background-color: #4285F4;
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar {
+        background-color: #4285F4;
+    }
+}
+
+header,
+.viewHeader {
+  height: 95vh;
+}
+.card{
+    width: 500px;
+    height: 480;
+}
+@media only screen and (max-width: 500px){
+    .card{
+        width: calc(500px - 20vw);
+    }
+}
+#img_card_home_page_long{
+    width: 90vw;
+    margin: 5vw;
+}
+#img_card_home_page_long, #img_card_home_page_column1, #img_card_home_page_column2{
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#img_card_home_page_column1{
+    margin-left: 5vw;
+    width: 40vw;
+}
+#img_card_home_page_column2{
+    margin-right: 5vw;
+    width: 40vw;
+    margin-left: auto;
+}
+@media only screen and (max-width: 765px){
+    #img_card_home_page_column1, #img_card_home_page_column2{
+        margin: 5vw;
+        width: 90vw;
+    }
+}
+html,
+body,
+.view {
+  height: 100vh;
+}
+/* Carousel*/
+.carousel,
+.carousel-item,
+.carousel-item.active {
+  height: 100vh;
+}
+.carousel-inner {
+  height: 100vh;
+}
+.carousel-item:nth-child(1) {
+  background-image: url("../img/the-magestic-beauty-of-evening-sky.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+.carousel-item:nth-child(2) {
+  background-image: url("../img/take-a-minute-to-contemplate-such-a-nature.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+.carousel-item:nth-child(3) {
+  background-image: url("../img/green-is-so-calming-and-peaceful.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+#carousel-2-item:nth-child(1) {
+  background-image: url("../img/nice-little-park-for-taking-some-rest.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+#carousel-2-item:nth-child(2) {
+  background-image: url("../img/photo-of-a-building-glass-facade.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+#carousel-2-item:nth-child(3) {
+  background-image: url("../img/buildings.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+#carousel-2-item:nth-child(4) {
+  background-image: url("../img/perfect-weather-and-place-for-a-walk.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+#carousel-3-item:nth-child(1) {
+  background-image: url("../img/IMG_20190215_224601767.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
