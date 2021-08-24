@@ -1,0 +1,63 @@
+<?php
+	session_start();
+	if (!isset($_SESSION['UsuarioNivel'])) {
+		$_SESSION['UsuarioNivel'] = "0";
+	}
+	$servername = "";
+	$username = "";
+	$password = "";
+	$dbname = "";
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	if ($conn->connect_error) 
+	{
+		die("Connection failed: " . $conn->connect_error);
+	    mysqli_close($conn);
+	}
+
+	if (isset($_GET['ArticleID']) OR isset($_GET['TypeOfArticle'])) {
+		$ArticleID = $_GET['ArticleID'];
+		$TypeOfArticle = $_GET['TypeOfArticle'];		
+	}
+	else
+	{
+	}
+
+	$sql = "SELECT * FROM articles WHERE `SecondID` = '".$ArticleID."' AND `TypeOfArticle` = '".$TypeOfArticle."';";
+	
+	$result = $conn->query($sql);
+	$result2 = $result->fetch_array(MYSQLI_ASSOC);
+	$ArticleContent = $result2['Content'];
+	$ArticleRedactor = $result2['Autor'];
+	$ArticleRedactionDate = $result2['CreationDate'];
+	if ($_SESSION['UsuarioNivel'] < 1) {
+		if ($result2['Aprouved'] == "1") {
+			echo "<div id='ArticleNameDIV'>".$ArticleName."</div><br/>";
+			echo "<article>";	
+			echo "Article ecrit par ".$ArticleRedactor."<br/>";
+			echo "Le ".$ArticleRedactionDate."<br/>";
+			echo "<br/>".$ArticleContent;
+			echo "</article>";
+		}
+		else
+		{
+				
+		}
+	}
+	else
+	{
+		echo "<div id='ArticleNameDIV'>".$ArticleName."</div><br/>";
+		echo "<article>";
+		if ($result2['Aprouved'] == "1") {
+			echo "Article dÃ©ja aprouvÃ©<br/>";
+		}
+		else
+		{
+		echo "Article encore non aprouvÃ©<br/>";
+		}	
+		echo "Article ecrit par ".$ArticleRedactor."<br/>";
+		echo "Le ".$ArticleRedactionDate."<br/>";
+		echo "<br/>".$ArticleContent;
+		echo "</article>";
+	}	
+	include("PageParts/Footer.php");
+?>

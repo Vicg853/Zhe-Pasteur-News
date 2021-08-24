@@ -1,0 +1,1095 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+@import url('https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz');
+@import url('https://fonts.googleapis.com/css?family=Markazi+Text');
+@import url('https://fonts.googleapis.com/css?family=Faster+One');
+/*ALL*/
+input, select, a, button
+{
+    outline:none;
+}
+a:after
+{
+    display: block;
+    content: '';
+    border-bottom: solid 5px white; 
+    transform: scaleY(0);  
+    transition: transform 0.5s ease-in-out;
+}
+a:hover:after
+{ 
+    transform: scaleX(1); 
+}
+a:after
+{
+    transform-origin: 0% 100%;
+}
+a:hover
+{
+    cursor: pointer;
+}
+
+
+
+/*Menu Navigation*/
+.sidenav 
+{
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(38, 38, 38);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+.sidenav:hover
+{
+    overflow-y: scroll;
+}
+.sidenav a 
+{
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+.sidenav a:hover 
+{
+    color: #f1f1f1;
+}
+.sidenav .closebtn 
+{
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+.closebtn:after
+{
+    display: none;
+}
+#main 
+{
+    transition: margin-left .5s;
+    padding: 16px;
+}
+#UsersDIVInNavBar
+{
+    width: 100%;
+    background-color: grey;
+    border-top-right-radius: 5px; 
+    margin-top: 200px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 10px;
+}
+#UsersDIVInNavBar a
+{
+    font-size: 20px;
+    color: white;
+}
+#NameDivLoginUserNavBar
+{
+    margin-left: 60px;
+    text-align: center;
+    width: 100%;
+    font-size: 25px;
+    color: white;
+}
+
+
+
+/*Header All*/
+header
+{
+    text-align: center;
+    padding-top: 290px;
+    padding-bottom: 210px;
+    color: white;
+    background-image: url(Images/FotoHeader.jpg);
+    margin-left: -8px;
+    margin-right: -8px;
+    margin-top: -10px;
+    font-size: 20px;
+    font-family: 'Ubuntu', sans-serif;
+    animation-name: HeaderTransition;
+    animation-duration: 1.5s;
+    overflow: hidden;
+}
+@keyframes HeaderTransition
+{
+    0% 
+    {
+       transform: scale(4);
+       z-index: 1;
+    }
+    100%
+    {
+        transform: scale(1);
+        z-index: 1;
+    }
+    
+}
+#CustomHeader1
+{
+    text-align: center;
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    color: white;
+    background-image: url(Images/FotoHeader.jpg);
+    animation-name: HeaderTransition;
+    animation-duration: 1s;
+    margin-left: 1px;
+    font-size: 50px;
+    padding-top: 380px;
+}
+
+
+
+
+/*Menus*/
+#InternationalMenu, #FranceMenu, #BresilMenu, #TechnologieMenu, #LyceePasteurMenu
+{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: rgb(38, 38, 38);
+    transition: 1.5s;
+    height: 0;
+    overflow-x: hidden;
+}
+#CloseButton
+{
+    color: #818181;
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    bottom: 20px;
+    font-size: 60px;
+    transition: 0.5s;
+    height: 61px;
+}
+#CloseButton:hover
+{
+    color: #f1f1f1;
+}
+
+
+
+/*Navigation Bar*/
+nav
+{ 
+    position: fixed;
+    top:0;
+    right: 0;
+    left: 0;
+    background-color: rgba(86, 86, 86, 0.67);
+    height: 60px;
+    z-index: 1;
+    display: inline-block;
+}
+nav a
+{
+    color: white;
+    text-decoration: none;
+}
+#LeftLinksNavBar
+{
+    display: inline-flex;
+}
+#ButtonMenuNavBar, #HomeButton
+{
+    padding-top: 6px;
+    padding-bottom: 14px;
+    text-decoration: none;
+    color: white;
+    font-size: 33px;
+    padding-bottom: 17px;
+    margin-left: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    display:inline-block;
+}
+#SearchInputNavBar
+{
+    border: none;
+    width: 150px;
+    height: 20px;
+    padding: 5px;
+    font-family: 'Ubuntu', sans-serif;
+    background: none; 
+    margin-top: 13px;
+    margin-left: 400px; 
+    border-bottom: 2px solid white;
+    color: white;
+
+}
+#SubmitSearchNavBar
+{
+    background: none;
+    border: none;
+    color: white;
+    margin-left: 5px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;  
+}
+#ButtonMenuNavBar:after
+{
+    display: none;
+}
+#RightTitleNavBar
+{
+    position: fixed;
+    right: 50px;
+    top: 0;
+    padding-top: 6px;
+    font-size: 40px;
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+
+
+
+/*scroler all*/
+::-webkit-scrollbar 
+{
+    position: absolute;
+    width: 10px;
+    transition: 0.5s;
+}
+::-webkit-scrollbar-track 
+{
+    border-radius: 5px;
+    background-color: white; 
+    transition: 0.5s;
+}
+::-webkit-scrollbar-thumb 
+{
+    background-color:grey;
+    border-radius: 5px;
+    transition: 0.5s;
+}
+
+
+
+/*Menus Choises Links for home menu*/
+#MenuChoises
+{
+    margin: auto;
+    width: 1100px;
+    flex-wrap: wrap;
+    display: flex;
+    margin-top: 40px;
+    align-content: center;
+    justify-content: space-around;
+    opacity: 1;
+}
+#MenuChoiseLink
+{
+    border-bottom: 10px solid rgb(38, 38, 38);
+    width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: 0px 0px 25px;
+    background-color: white;
+    margin-bottom: 50px;
+    transition: 0.5s;
+}
+#MenuChoiseLink:hover
+{
+    cursor: pointer;
+    transform: scale(1.05);
+}
+#TextMenuChoise
+{
+    height: 100px;
+    padding-left: 20px;
+    width: 100%;
+    padding-top: 25px;
+}
+#TextMenuChoise span
+{
+    text-decoration: none;
+    color: black;
+    font-size: 19px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-family: 'Inconsolata', monospace;
+}
+
+
+
+/*Menus content*/
+#ArticleChoisesLinkText
+{
+   position: absolute;
+   bottom: 8px;
+   left: 16px;
+   font-size: 50px;
+   color: white;
+   font-size: 30px;
+   text-decoration: none;
+   margin-bottom: 40px;
+   margin-left: 60px;
+   font-family: 'Markazi Text', serif;
+   width: 99%;
+}
+#ArticlesChoisesLinkImage
+{
+    display: block;
+    width: 99%;
+    margin-left: 2px;
+    height: 400px;
+    opacity: 0.5;
+}
+#ArticleChoisesLinkDIV
+{
+    position: relative;
+    height: 400px;
+    width: 50%;
+}
+#ArticleChoisesLinkDIV:after, #ArticlesChoisesLinkImage:after, #ArticleChoisesLinkText:after
+{
+    border: none;
+}
+#ArticlesChoisesInMenu
+{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 120px;
+    width: 100%;
+    background-color: rgb(38, 38, 38);
+    min-height: 1000px;
+}
+
+
+
+/*Footer All*/
+footer
+{   
+    position: absolute;
+    margin-top: 30px;
+    left: 0;
+    right: 0;
+    background-color: rgb(64, 64, 64);
+    height: 200px;
+    border-top: 10px solid white;
+    box-shadow: 0px 0px 25px;
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+#LinksOtherPages
+{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    display: block;
+    margin-right: 10px;
+}
+#LinksOtherPages:hover
+{
+    transition: 0.5s;
+    opacity: 0.5;
+}
+#LeftButtons
+{
+    align-self: left;
+    padding-top: 20px;
+    padding-left: 20px;
+}
+#RightButtons
+{
+    align-self: right;
+    margin-left: auto;
+    padding-right: 100px;
+    padding-top: 25px;
+}
+#SocialMediasLinksDIV
+{
+    font-size: 20px;
+    text-decoration: none;
+    text-align: center;
+    border-bottom: 5px solid white;
+    border-radius: 5px;
+    padding-bottom: 15px;
+    color: white;
+}
+#EmailLinkDIV
+{
+    padding-top: 15px;
+    font-size: 20px;
+    margin-top: 5px;
+    text-align: center;
+    color: white;
+}
+.fa
+{
+    padding: 10px;
+    font-size: 30px;
+    width: 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+}
+.fa-instagram
+{
+    margin-top: 10px;
+    background: #125688;
+    color: white;
+    background-color: grey;
+    transition: 1s;
+}
+.fa-instagram:after
+{
+    display: none;
+}
+.fa-instagram:hover
+{
+    background-color: white;
+    color: black;
+}
+
+
+/*About Us Page*/
+#LittleIntroAboutUs
+{
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    width: 1100px;
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 50px;
+}
+#EquipMembers
+{
+    width: 1100px;
+    margin: auto;
+    flex-wrap: wrap;
+    display: flex;
+    align-content: center;
+}
+#RightTextAboutUs
+{
+    margin-right: 0px;
+    width: 550px;
+    text-align: center;
+    margin-top: 10px;
+    height: 700px; 
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+#LeftTextAboutUs
+{
+    margin-top: 10px;
+    margin-left: 0px;
+    width: 550px;
+    text-align: left;
+    height: 700px;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+#NamesAboutUs
+{
+    font-family: 'Pacifico', cursive;
+}
+#AboutTheWebPage
+{
+    width: 1100px;
+    margin: auto;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+
+/*Administration Page*/
+#LoginDivAdminPage
+{
+    width: 500px;
+    height: auto;
+    background-color: rgba(86, 86, 86, 1); 
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 70px;
+    box-shadow: 10px 10px 60px;
+    border-radius: 10px;
+    font-size: 20px;
+}
+#InputLoginAdminPage, #InputSenhaAdminPage
+{
+    background-color: white;
+    width: 100px;
+    border:none;
+    color: black;
+    border-radius: 20px;
+    transition: 0.5s; 
+    margin-top: 30px;
+    margin-right: 15px;
+    font-family: 'Ubuntu', sans-serif;
+    padding: 5px;
+}
+#InputLoginAdminPage:hover, #InputSenhaAdminPage:hover, #SubmitAdminLogin:hover
+{
+    transform: scale(1.1);
+}
+#LabelAndInputAdminLogin, #LabelAndInputAdminPassword
+{
+    color: white;
+}
+#LoginAndPasswordAdminInsert
+{
+    height: auto;
+    margin-left: auto;
+    width: 250px;
+    margin-right: 0px;
+    text-align: right;
+}
+#SubmitAdminLogin
+{
+    text-align: center;
+    margin-top: 20px;
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-bottom: 30px;
+    background-color: white;
+    border:none;
+    padding: 5px;
+    color: black;
+    border-radius: 20px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+}
+
+
+
+/*AdminsPage*/
+#HelloMessageAdminPage
+{
+    color: white;
+    margin-top: 20px;
+    margin-left: 20px;
+    font-family: 'Ubuntu', sans-serif;
+}
+#NavigationMenuAdministration
+{
+    width: 315px;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;  
+    display: flex;
+    background-color: rgba(86, 86, 86, 1);
+    flex-direction: column;
+    align-items: left;
+}
+#ButtonsMenusAdmin 
+{
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: auto;
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    display: block;
+    width: max-content;
+    padding: 10px;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+#ButtonsMenusAdmin:hover
+{
+    color: black;
+    background-color: white;
+    box-shadow: 10px 10px 60px;
+    transform: scale(1.15);
+    box-shadow: 10px 10px 60px;
+}
+#MenuRedactionAdminPage, #MenuAdministrationAdminPage, #ITMenuAdminPage, #MenuArticlesExistantsAdminPage, #MenuAdministrationEcoleAdminPage
+{
+    background-color: white;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    transition: 1s;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: rgb(242, 242, 242);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 0%;
+    box-shadow: 10px 10px 60px;
+    align-items: left;
+    transition: 10s;
+}
+
+
+
+/*Content Menu Redaction Admin Page*/
+#InputTextAndImageDIVRedacteAdminPage
+{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: auto;
+    padding-left: 70px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+#InputArticleTextRedactedAdminPageCSS
+{
+    width: 500px;
+    min-height: 500px;
+    
+}
+#InputArticleNameRedactedAdminPageCSS
+{
+    width: 30%;
+    height: 20px;
+}
+#InputArticleImagePresentationRedactedAdminPageCSS, #InputTipeOfArticleRedacAdminPageCSS
+{
+    width: auto;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+#InputArticleImagePresentationRedactedAdminPageCSS, #InputArticleNameRedactedAdminPageCSS, #InputArticleTextRedactedAdminPageCSS, #InputTipeOfArticleRedacAdminPageCSS
+{
+    border-radius: 20px;
+    background-color: white;
+    margin: auto;
+    border: black solid 5px;
+    margin-bottom: 50px;
+}
+
+
+
+/*Content Menu Administration Admin Page*/
+#SubMenuCadastroAdminMenuAdminPage
+{
+    width: 600px;
+    height: auto;
+    margin-left: 50px;
+    background-color: rgba(86, 86, 86, 1); 
+    margin-top: 50px;
+    margin-bottom: 70px;
+    box-shadow: 10px 10px 60px;
+    border-radius: 10px;
+}
+#SubMenuCadastroAdminMenuAdminPage input, #SubMenuCadastroAdminMenuAdminPage select
+{
+    background-color: white;
+    width: 150px;
+    border:none;
+    color: black;
+    border-radius: 20px;
+    transition: 0.5s; 
+    margin-top: 30px;
+    font-family: 'Ubuntu', sans-serif;
+    padding: 5px;
+}
+#SubMenuCadastroAdminMenuAdminPage input:hover, #SubMenuCadastroAdminMenuAdminPage select:hover ,#SubMenuUsersAdminMenuAdminPage input:hover
+{
+    transform: scale(1.1);
+}
+#SubMenuCadastroAdminMenuAdminPage select
+{
+    width: auto;
+}
+#SubMenuCadastroAdminMenuAdminPage label
+{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+    color: white;
+    margin-left: 15px;
+    margin-right: 7px;
+}
+#InputCadastrarUsuario
+{
+    align-self: center;
+    width: 100px;
+    margin-bottom: 20px;
+    margin-left: 30px;
+}
+#SubMenuUsersAdminMenuAdminPage
+{
+    padding: 10px;
+    font-size: 20px;
+    font-family: 'Ubuntu', sans-serif;
+    margin-left: 50px;   
+    height: auto;
+    background-color: rgba(86, 86, 86, 1); 
+    box-shadow: 10px 10px 60px;
+    border-radius: 10px;
+    width: 1000px;
+}
+#UsersListInSubMenuUsersAdminPage
+{
+    height: auto;
+    margin: 10px;
+}
+#AdminNameAdminsList, #AdminEmailAdminsList, #AdminStatusAdminsList, #AdminLevelAdminsList
+{
+    width: 500px;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-right: 2px solid white;
+    color: white;
+}
+#RemoveAdminAdminList
+{
+    width: auto;
+    margin: 20px;
+    color: white;
+}
+#SubMenuUsersAdminMenuAdminPage input
+{
+    width: auto;
+    border-radius: 10px;
+    border: none;
+    padding: 5px;
+    transition: 0.5s;
+}
+#InputDivSubMenuAdminListAdminMenuAdminPage
+{
+    margin-left: 40px;
+}
+#SubMenuUsersAdminMenuAdminPage label, #SubMenuUsersAdminMenuAdminPage span, #SubMenuUsersAdminMenuAdminPage strike
+{
+    color: white;
+}
+
+
+
+/*Content Existant Articles*/
+#BarTypesArticlesTopMenuArticlesExistantsAdminPage
+{
+    width: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 10%;
+    display: inline-flex;
+    background-color: rgba(86, 86, 86, 0.67);
+}
+#BarTypesArticlesTopMenuArticlesExistantsAdminPage span
+{
+    color: black;
+    display: block;
+    height: auto;
+}
+#NoArticlesMessage
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    text-align: center;
+    opacity: 0.6;
+}
+#AprouveArticleInput
+{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+#SubMenuInterArticles, #SubMenuFRArticles, #SubMenuBRArticles, #SubMenuTEArticles, #SubMenuLPArticles
+{
+    background-color: white;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: white;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 80%;
+    height: 0%;
+    box-shadow: 10px 10px 60px;
+    align-items: left;
+    transition: 2s;
+}
+#SubMenuInterArticles:hover, #SubMenuFRArticles:hover, #SubMenuBRArticles:hover, #SubMenuTEArticles:hover, #SubMenuLPArticles:hover
+{
+    height: 90%;
+}
+
+
+
+
+
+
+/*Login Users*/
+#LinksUnderLoginDIVLoginNormalUserPage
+{
+    width: 100%;
+    height: 50px;
+    margin-bottom: 20px;
+    margin-top: 50px;
+    text-align: center;
+}
+#LinksUnderLoginDIVLoginNormalUserPage a
+{
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+    margin-left: 10px;
+}
+#LinksUnderLoginDIVLoginNormalUserPage a:hover
+{
+    text-decoration: underline;
+    opacity: 0.7;
+}
+
+
+
+/*Content my account page*/
+#ContentMyAccountPage
+{
+    margin-top: 90px;
+    margin-bottom: 40px;
+    width: 100%;
+    height: auto;
+    display: inline-flex;
+    font-family: 'Ubuntu', sans-serif;
+}
+#UserDataMyAcountPage
+{
+    width: 50%;
+    height: auto;
+}
+#UserUpdateDataMyAcountPage
+{
+    width: 50%;
+    height: auto;
+}
+#UserUpdateDataMyAcountPage input, #UserUpdateDataMyAcountPage select 
+{
+    background-color: rgb(206, 206, 206);
+    border:none;
+    border-radius: 20px; 
+    font-family: 'Ubuntu', sans-serif;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+#UserUpdatePasswordMyAcountPage
+{
+    margin-bottom: 30px;
+}
+#TextNameDataUserMyAcountPage, #TextDateDataUserMyAcountPage, #TextMailDataUserMyAcountPage
+{
+    margin-top: 10px;
+    font-size: 20px;
+    padding-left: 50px;
+}
+
+
+
+/*Article Content*/
+article
+{
+    width: 800px;
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 70px;
+    margin-bottom: 30px;
+    min-height: 500px;
+    word-break: break-all;
+}
+#ArticleNameDIV
+{
+    text-align: center;
+    margin: auto;
+    align-self: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-size: 60px;
+    border-bottom: solid black 1px;
+    word-break: break-all;
+}
+
+
+
+/*Error page*/
+#ErrorDiv
+{
+    height: 100%;
+    width: auto;
+    margin: auto;
+    align-self: center;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 200px;
+}
+#ErrorCode
+{
+    width: 100%;
+    margin-bottom: 30px;
+    margin-bottom: 30px;
+    display: inline-block;
+    font-size: 100px;
+    font-family: 'Faster One', cursive;
+}
+#LettersErrorPage
+{
+    transform: rotate(180deg);
+    font-size: 120px;
+}
+#ZPNLogoErrorPage
+{
+    margin-bottom: 50px;
+}
+#ErrorLittleMSG
+{
+    color: red;
+    width: 50%;
+    margin: auto;
+    align-self: center;
+}
+#ErrorAudio
+{
+    display: none;
+}
+#BlockMessageError
+{
+    color: red;
+    margin-left: 20%;
+    margin-top: 10px;
+    font-size: 20px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+
+
+/*Search System Page*/
+#FormInSearchPage
+{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    display: inline-flex;
+    margin-bottom: 20px;
+    align-content: center;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+#SubmitButtonSearchPage
+{
+    background-color: white;
+    border: grey solid 1px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 60px;
+    padding: 5px;
+    font-family: 'Ubuntu', sans-serif;
+    display: block;
+}
+#ContentToSearchDIV
+{
+    width: 700px;
+    height: 30px;
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 10px;
+    border: 2px grey solid;
+    box-shadow:inset 0 0 10px 0.5px grey;
+}
+#ContentToSearchAndSubmitDIV
+{
+    width: auto;
+    display: inline-flex;
+}
+#WhatSearchedSPAN
+{
+    color: grey;
+    font-size: 30px;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+#OptionsDIV
+{
+    margin-bottom: 20px;
+}
+#ResultsDIV
+{
+    width: 100%;
+    height: auto;
+    margin-top: 50px;
+    margin-bottom: 70px;
+}
+#ResultsSearch
+{
+    font-size: 20px;
+    color: black;
+    margin-top: 10px;
+    margin-left: 24%;
+}
+#ResultsSearch a
+{
+    text-decoration-line: none;
+    text-decoration-color: black;
+    color: black;
+    text-decoration: none;
+    padding: 10px;
+    width: 500px;
+    display: block;
+    transition: 0.5s;
+    border-bottom: white solid 5px;
+}
+#ResultsSearch a:hover
+{
+    background-color: rgb(204, 204, 204);
+    border-bottom: black solid 5px;
+}
+#ResultsSearch a:after
+{
+    display: none;
+}
+
+
+
+/*Messages main page*/
+#AutorationOrNotMainPage
+{
+    position: fixed;
+    top: 0px;
+    align-self: center;
+    padding: 50px;
+    background-color: white;
+    box-shadow: 10px 10px 60px black;
+    border-radius: 15px;
+    z-index: 1;
+    margin: auto;
+    display: block;
+    height: auto;
+    color: red;
+    border: solid grey 2px;
+}
+
+
+
+/*Media All*/
+@media screen and (max-width: 1200px) 
+{
+    
+}
